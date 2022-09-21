@@ -1,12 +1,9 @@
-import logo from "./logo.svg";
+import Header from "./components/Header/header";
 
 function App() {
   return (
     <div className="app-container">
-      <h1>Học tốt react nha bé !</h1>
-      <button name="" id="" class="btn btn-primary" href="#" role="button">
-        Buttun
-      </button>
+      <Header />
     </div>
   );
 }
