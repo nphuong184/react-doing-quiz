@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import ModalCreateUser from "./ModelCreateUser";
+import "./ManageUser.scss";
 
 const ManageUser = () => {
   return (
