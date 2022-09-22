@@ -7,13 +7,15 @@ import reportWebVitals from "./reportWebVitals";
 // import store from "./redux/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import User from "./components/User/user";
-import Admin from "./components/Admin/admin";
+import User from "./components/User/User";
+import Admin from "./components/Admin/Admin";
+import HomePage from "./components/Home/HomePage";
 
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
+        <Route index element={<HomePage />} />
         <Route path="/users" element={<User />}></Route>
         <Route path="/admin" element={<Admin />}></Route>
       </Route>

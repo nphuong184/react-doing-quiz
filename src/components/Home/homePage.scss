@@ -1,0 +1,20 @@
+.homepage-container {
+  .homepage-content {
+    position: relative;
+    padding: 50px 100px 0;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    .title {
+      font-size: 64px;
+      line-height: 76px;
+      letter-spacing: normal;
+      margin-bottom: 24px;
+      max-width: none;
+    }
+    .description {
+      font-size: 20px;
+    }
+  }
+}

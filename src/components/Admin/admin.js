@@ -1,5 +1,9 @@
 const Admin = (props) => {
-  return <div>admin cpn</div>;
+  return (
+    <div>
+      <p>Admin</p>
+    </div>
+  );
 };
 
 export default Admin;
