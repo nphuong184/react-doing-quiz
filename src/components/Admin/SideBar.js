@@ -1,21 +1,15 @@
-import "react-pro-sidebar/dist/css/styles.css";
+import { FaGem, FaTachometerAlt } from "react-icons/fa";
 import {
-  ProSidebar,
   Menu,
   MenuItem,
-  SubMenu,
-  SidebarHeader,
-  SidebarFooter,
+  ProSidebar,
   SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SubMenu,
 } from "react-pro-sidebar";
-import {
-  FaTachometerAlt,
-  FaGem,
-  FaList,
-  FaGithub,
-  FaRegLaughWink,
-  FaHeart,
-} from "react-icons/fa";
+import "react-pro-sidebar/dist/css/styles.css";
+import { Link } from "react-router-dom";
 import sidebarBg from "../../assets/bg-admin.jpg";
 
 const SideBar = (props) => {
@@ -49,11 +43,13 @@ const SideBar = (props) => {
         <SidebarContent>
           <Menu iconShape="circle">
             <MenuItem icon={<FaTachometerAlt />}>Dashboard</MenuItem>
-            {/* <MenuItem icon={<FaGem />}>Components</MenuItem> */}
+            <Link to="/admins" />
           </Menu>
           <Menu iconShape="circle">
             <SubMenu icon={<FaGem />} title="Features">
-              <MenuItem>Quan ly user</MenuItem>
+              <MenuItem>
+                Quan ly user <Link to="/admins/manage-users"></Link>
+              </MenuItem>
               <MenuItem>Quan ly bai quiz</MenuItem>
               <MenuItem>Quan ly cau hoi</MenuItem>
             </SubMenu>
