@@ -3,8 +3,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FcPlus } from "react-icons/fc";
 
-const ModalCreateUser = () => {
-  const [show, setShow] = useState(false);
+const ModalCreateUser = (props) => {
+  const { show, setShow } = props;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -23,12 +23,10 @@ const ModalCreateUser = () => {
     }
   };
 
+  const handSubmitCreateUser = () => {};
+
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Add new user
-      </Button>
-
       <Modal
         backdrop="static"
         show={show}
@@ -81,6 +79,7 @@ const ModalCreateUser = () => {
               <select
                 className="form-select"
                 onChange={(e) => setRole(e.target.value)}
+                value={role}
               >
                 <option value="USER">USER</option>
                 <option value="ADMIN">ADMIN</option>
@@ -110,7 +109,10 @@ const ModalCreateUser = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button
+            variant="primary"
+            onClick={() => (handSubmitCreateUser) => {}}
+          >
             Save Changes
           </Button>
         </Modal.Footer>

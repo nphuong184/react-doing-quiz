@@ -23,7 +23,7 @@ const Header = () => {
               <NavLink to="/users" className="nav-link">
                 Users
               </NavLink>
-              <NavLink to="/admin" className="nav-link">
+              <NavLink to="/admins" className="nav-link">
                 Admin
               </NavLink>
             </Nav>
