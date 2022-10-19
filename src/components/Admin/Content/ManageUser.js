@@ -9,7 +9,7 @@ const ManageUser = () => {
 
   return (
     <div className="manage-users-container">
-      <div className="title">ManageUser</div>
+      <div className="title">Manage User</div>
       <div className="users-content">
         <div>
           <Button variant="info" onClick={() => setShowModelCreateUser(true)}>
