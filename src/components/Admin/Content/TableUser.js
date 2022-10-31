@@ -1,8 +1,8 @@
 import { Button, Table } from "react-bootstrap";
 
 const TableUser = (props) => {
-  // const [listUsers, setListUsers] = useState([]);s
   const { listUsers } = props;
+  // const listUsers = props.listUsers;
 
   return (
     <>
@@ -28,7 +28,11 @@ const TableUser = (props) => {
                   <td>{item.role}</td>
                   <td>
                     <Button variant="secondary">View</Button>
-                    <Button variant="warning" className="mx-3">
+                    <Button
+                      variant="warning"
+                      className="mx-3"
+                      onClick={() => props.handleClickBtnUpdateUser(item)}
+                    >
                       Update
                     </Button>
                     <Button variant="danger">Delete</Button>
