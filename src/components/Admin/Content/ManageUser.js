@@ -1,8 +1,9 @@
-import { Button } from "react-bootstrap";
-import ModalCreateUser from "./ModelCreateUser";
-import "./ManageUser.scss";
-import { FcPlus } from "react-icons/fc";
 import { useState } from "react";
+import { Button } from "react-bootstrap";
+import { FcPlus } from "react-icons/fc";
+import "./ManageUser.scss";
+import ModalCreateUser from "./ModelCreateUser";
+import TableUser from "./TableUser";
 
 const ManageUser = () => {
   const [showModelCreateUser, setShowModelCreateUser] = useState(false);
@@ -12,11 +13,15 @@ const ManageUser = () => {
       <div className="title">Manage User</div>
       <div className="users-content">
         <div>
-          <Button variant="info" onClick={() => setShowModelCreateUser(true)}>
+          <Button
+            className="mt-3 mb-3"
+            variant="info"
+            onClick={() => setShowModelCreateUser(true)}
+          >
             <FcPlus /> Add new user
           </Button>
         </div>
-        <div>Table Users</div>
+        <TableUser></TableUser>
         <ModalCreateUser
           show={showModelCreateUser}
           setShow={setShowModelCreateUser}

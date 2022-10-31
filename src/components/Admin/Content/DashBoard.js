@@ -1,4 +1,4 @@
 const DashBoard = () => {
-  return <div>feefe</div>;
+  return <div>DashBoard</div>;
 };
 export default DashBoard;
