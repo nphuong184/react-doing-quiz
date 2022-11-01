@@ -55,6 +55,7 @@ const ManageUser = () => {
           show={showModelUpdateUser}
           setShow={setShowModelUpdateUser}
           dataUpdate={dataUpdate}
+          fetchListUsers={fetchListUsers}
         />
       </div>
     </div>

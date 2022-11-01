@@ -3,6 +3,7 @@ import { Button, Table } from "react-bootstrap";
 const TableUser = (props) => {
   const { listUsers } = props;
   // const listUsers = props.listUsers;
+  // console.log(listUsers);
 
   return (
     <>
