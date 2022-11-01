@@ -9,7 +9,6 @@ import _ from "lodash";
 
 const ModalUpdateUser = (props) => {
   const { show, setShow, dataUpdate } = props;
-  console.log(dataUpdate);
 
   const handleClose = () => {
     setShow(false);
@@ -32,7 +31,6 @@ const ModalUpdateUser = (props) => {
   const [previewImage, setPreviewImage] = useState("");
 
   useEffect(() => {
-    console.log("run effect");
     if (!_.isEmpty(dataUpdate)) {
       // update state
       setEmail(dataUpdate.email);
@@ -66,7 +64,6 @@ const ModalUpdateUser = (props) => {
     }
   };
 
-  console.log("check render ", dataUpdate);
   return (
     <>
       <Modal

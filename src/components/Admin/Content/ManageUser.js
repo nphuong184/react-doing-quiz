@@ -3,15 +3,23 @@ import { Button } from "react-bootstrap";
 import { FcPlus } from "react-icons/fc";
 import { getAllUsers } from "../../services/apiService";
 import "./ManageUser.scss";
-import ModalCreateUser from "./ModelCreateUser";
-import ModalUpdateUser from "./ModelUpdateUser";
+import ModalCreateUser from "./ModalCreateUser";
+import ModalDeleteUser from "./ModalDeleteUser";
+import ModalUpdateUser from "./ModalUpdateUser";
 import TableUser from "./TableUser";
 
 const ManageUser = () => {
-  const [showModelCreateUser, setShowModelCreateUser] = useState(false);
-  const [showModelUpdateUser, setShowModelUpdateUser] = useState(false);
+  const [showModalCreateUser, setShowModalCreateUser] = useState(false);
+
+  const [showModalUpdateUser, setShowModalUpdateUser] = useState(false);
+
   const [listUsers, setListUsers] = useState();
+
   const [dataUpdate, setDataUpdate] = useState();
+
+  const [showModalDeleteUser, setShowModalDeleteUser] = useState();
+
+  const [dataDelete, setDataDelete] = useState();
 
   useEffect(() => {
     fetchListUsers();
@@ -25,13 +33,19 @@ const ManageUser = () => {
   };
 
   const handleClickBtnUpdateUser = (user) => {
-    setShowModelUpdateUser(true);
+    setShowModalUpdateUser(true);
     setDataUpdate(user);
   };
 
   const resetUpdateData = () => {
     setDataUpdate({});
   };
+
+  const handleClickBtnDeleteUser = (user) => {
+    setShowModalDeleteUser(true);
+    setDataDelete(user);
+  };
+
   return (
     <div className="manage-users-container">
       <div className="title">Manage User</div>
@@ -40,7 +54,7 @@ const ManageUser = () => {
           <Button
             className="mt-3 mb-3"
             variant="info"
-            onClick={() => setShowModelCreateUser(true)}
+            onClick={() => setShowModalCreateUser(true)}
           >
             <FcPlus /> Add new user
           </Button>
@@ -48,18 +62,24 @@ const ManageUser = () => {
         <TableUser
           listUsers={listUsers}
           handleClickBtnUpdateUser={handleClickBtnUpdateUser}
+          handleClickBtnDeleteUser={handleClickBtnDeleteUser}
         ></TableUser>
         <ModalCreateUser
-          show={showModelCreateUser}
-          setShow={setShowModelCreateUser}
+          show={showModalCreateUser}
+          setShow={setShowModalCreateUser}
           fetchListUsers={fetchListUsers}
         />
         <ModalUpdateUser
-          show={showModelUpdateUser}
-          setShow={setShowModelUpdateUser}
+          show={showModalUpdateUser}
+          setShow={setShowModalUpdateUser}
           dataUpdate={dataUpdate}
           fetchListUsers={fetchListUsers}
           resetUpdateData={resetUpdateData}
+        />
+        <ModalDeleteUser
+          show={showModalDeleteUser}
+          setShow={setShowModalDeleteUser}
+          dataDelete={dataDelete}
         />
       </div>
     </div>
