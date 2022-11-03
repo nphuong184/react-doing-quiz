@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { FcPlus } from "react-icons/fc";
-import { getAllUsers } from "../../services/apiService";
+import {
+  getAllUsers,
+  getListUsersWithPaginate,
+} from "../../services/apiService";
 import "./ManageUser.scss";
 import ModalCreateUser from "./ModalCreateUser";
 import ModalDeleteUser from "./ModalDeleteUser";
@@ -21,14 +24,30 @@ const ManageUser = () => {
 
   const [dataDelete, setDataDelete] = useState();
 
+  const [pageCount, setPageCount] = useState(0);
+
+  const LIMIT_USER = 9;
+
   useEffect(() => {
-    fetchListUsers();
+    fetchListUsersWithPaginate(1);
+    // fetchListUsers;
   }, []);
 
   const fetchListUsers = async () => {
     let res = await getAllUsers();
     if (res.EC === 0) {
       setListUsers(res.DT);
+    }
+  };
+
+  const fetchListUsersWithPaginate = async (page) => {
+    let res = await getListUsersWithPaginate(page, LIMIT_USER);
+    if (res.EC === 0) {
+      console.log(res.DT);
+      setListUsers(res.DT.users);
+      setPageCount(res.DT.totalPages);
+    } else {
+      console.log("sai");
     }
   };
 
@@ -63,6 +82,8 @@ const ManageUser = () => {
           listUsers={listUsers}
           handleClickBtnUpdateUser={handleClickBtnUpdateUser}
           handleClickBtnDeleteUser={handleClickBtnDeleteUser}
+          fetchListUsersWithPaginate={fetchListUsersWithPaginate}
+          pageCount={pageCount}
         ></TableUser>
         <ModalCreateUser
           show={showModalCreateUser}

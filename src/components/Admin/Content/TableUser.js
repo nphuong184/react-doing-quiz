@@ -1,9 +1,15 @@
+import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
+import ReactPaginate from "react-paginate";
 
 const TableUser = (props) => {
-  const { listUsers } = props;
+  const { listUsers, pageCount } = props;
   // const listUsers = props.listUsers;
-  // console.log(listUsers);
+
+  const handlePageClick = (event) => {
+    props.fetchListUsersWithPaginate(+event.selected + 1);
+    console.log(`User requested page number ${event.selected}`);
+  };
 
   return (
     <>
@@ -53,6 +59,28 @@ const TableUser = (props) => {
             </tr>
           )}
         </tbody>
+        <div className="container-paginate d-flex justify-content-center">
+          <ReactPaginate
+            nextLabel="Next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={3}
+            marginPagesDisplayed={2}
+            pageCount={pageCount}
+            previousLabel="< Prev"
+            pageClassName="page-item"
+            pageLinkClassName="page-link"
+            previousClassName="page-item"
+            previousLinkClassName="page-link"
+            nextClassName="page-item"
+            nextLinkClassName="page-link"
+            breakLabel="..."
+            breakClassName="page-item"
+            breakLinkClassName="page-link"
+            containerClassName="pagination"
+            activeClassName="active"
+            renderOnZeroPageCount={null}
+          />
+        </div>
       </Table>
     </>
   );
