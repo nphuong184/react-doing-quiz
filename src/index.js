@@ -12,6 +12,7 @@ import Admin from "./components/Admin/Admin";
 import HomePage from "./components/Home/HomePage";
 import ManageUser from "./components/Admin/Content/ManageUser";
 import DashBoard from "./components/Admin/Content/DashBoard";
+import Login from "./components/Auth/Login";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -23,6 +24,8 @@ ReactDOM.render(
       <Route path="/admins" element={<Admin />}>
         <Route index element={<DashBoard />}></Route>
         <Route path="manage-users" element={<ManageUser />}></Route>
+      </Route>
+      <Route path="/login" element={<Login />}>
       </Route>
     </Routes>
   </BrowserRouter>,
