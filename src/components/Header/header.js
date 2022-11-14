@@ -36,13 +36,6 @@ const Header = () => {
             <Button variant="outline-dark" className="btn-signup">
               Sign up
             </Button>
-            {/* <Nav>
-              <NavDropdown title="Setting" id="basic-nav-dropdown">
-                <NavDropdown.Item>Login</NavDropdown.Item>
-                <NavDropdown.Item>Logout</NavDropdown.Item>
-                <NavDropdown.Item>Profile</NavDropdown.Item>
-              </NavDropdown>
-            </Nav> */}
           </Navbar.Collapse>
         </Container>
       </Navbar>
