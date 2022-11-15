@@ -20,7 +20,8 @@ const Login = (props) => {
         let data = await postLogin(email,password)
         console.log(data,data.EC);
         if(data && data.EC ===0){
-            toast.success(data.EM)
+            toast.success(data.EM);
+            navigate('/')
         }
 
         if(data && +data.EC !== 0 ){
