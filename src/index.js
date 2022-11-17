@@ -3,11 +3,15 @@ import ReactDOM from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import Layout from "./Layout";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Layout />
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 

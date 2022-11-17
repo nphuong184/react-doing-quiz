@@ -5,7 +5,8 @@
         justify-content: end;
         padding: 5px 20px;
         font-size: 14px;
-        .sign-up{
+
+        .sign-up {
             background-color: #fff;
             color: #262627;
             border: 1px solid #262627;
@@ -38,6 +39,17 @@
         }
 
         .content-form {
+            .input-password {
+                position: relative;
+            }
+
+            .icon-eye {
+                position: absolute;
+                top: 5px;
+                right: 10px;
+                font-size: 18px;
+            }
+
             .forgot {
                 text-decoration: underline;
                 color: #73777B;
@@ -45,7 +57,8 @@
                 font-size: 16px;
             }
         }
-        .back{
+
+        .back {
             margin-top: 15px;
             font-size: 14px;
             text-align: center;
