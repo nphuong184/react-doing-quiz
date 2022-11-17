@@ -50,6 +50,34 @@
                 font-size: 18px;
             }
 
+            .btn-login {
+                &:disabled {
+                    background-color: #dddddd;
+                    color: #bab7b7;
+                    cursor: no-drop;
+                    border: none;
+
+                }
+            }
+
+            .loaderIcon {
+                margin-right: 7px;
+                top: 2px;
+                animation: spin 1s infinite linear;
+                color: aqua;
+                font-size: large;
+            }
+
+            @keyframes spin {
+                from {
+                    transform: scale(1) rotate(0deg);
+                }
+
+                to {
+                    transform: scale(1) rotate(360deg);
+                }
+            }
+
             .forgot {
                 text-decoration: underline;
                 color: #73777B;

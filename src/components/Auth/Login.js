@@ -3,19 +3,20 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {postLogin} from "../services/apiService"
-import { AiFillEyeInvisible,AiFillEye } from 'react-icons/ai';
+import { postLogin } from "../services/apiService"
+import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai';
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
-
+import { ImSpinner10 } from "react-icons/im"
 const Login = (props) => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [isShowPassword,setIsShowPassword] =useState(false)
-
-    const dispatch = useDispatch();
+    const [isShowPassword, setIsShowPassword] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const valideteEmail = (email) => {
         return String(email)
@@ -25,39 +26,43 @@ const Login = (props) => {
             );
     };
 
-    const handleLogin = async(e) => {
+    const handleLogin = async (e) => {
         e.preventDefault()
 
         // validate
         const isValidEmail = valideteEmail(email);
 
         if (!isValidEmail) {
-          toast.error("Invalid email");
-          return;
+            toast.error("Invalid email");
+            return;
         }
-    
+
         if (!password) {
-          toast.error("Invalid password");
-          return;
+            toast.error("Invalid password");
+            return;
         }
+
+        setIsLoading(true);
+
         // subimit api
-        let data = await postLogin(email,password)
-        console.log(data,data.EC);
-        if(data && data.EC ===0){
+        let data = await postLogin(email, password)
+        console.log(data, data.EC);
+        if (data && data.EC === 0) {
             dispatch(doLogin(data));
             toast.success(data.EM);
-            navigate('/')
-        } 
+            setIsLoading(false)
+            navigate('/')    
+        }
 
-        if(data && +data.EC !== 0 ){
+        if (data && +data.EC !== 0) {
             toast.error(data.EM)
+            setIsLoading(false)
         }
 
     }
 
 
     return (
-        
         <div className="login-container">
             <div className="header">
                 <div>
@@ -85,33 +90,40 @@ const Login = (props) => {
 
                         <Form.Group className="mb-3" controlId="formBasicPassword">
                             <Form.Label>Password</Form.Label>
-                            <div className="input-password">    
-                                        <Form.Control
-                                            type={isShowPassword ? "text" : "password"}
-                                            placeholder="At least 8 characters"
-                                            password={password}
-                                            onChange={(e) => setPassword(e.target.value)}
-                                        />
-                                        {isShowPassword ? 
-                                        <span className="icon-eye" onClick={()=>setIsShowPassword(false)}>
-                                        < AiFillEye/>
+                            <div className="input-password">
+                                <Form.Control
+                                    type={isShowPassword ? "text" : "password"}
+                                    placeholder="At least 8 characters"
+                                    password={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
+                                {isShowPassword ?
+                                    <span className="icon-eye" onClick={() => setIsShowPassword(false)}>
+                                        < AiFillEye />
                                     </span>
                                     :
-                                    <span className="icon-eye" onClick={()=>setIsShowPassword(true)}>
+                                    <span className="icon-eye" onClick={() => setIsShowPassword(true)}>
                                         <AiFillEyeInvisible />
                                     </span>
-                                    }
-                                    </div>
-                                </Form.Group>
-                                    
+                                }
+                            </div>
+                        </Form.Group>
                         <p className="forgot">Forgot password?</p>
-                        <Button onClick={(e) => handleLogin(e)} className="w-100" variant="dark" type="submit">
-                            Log in to Typeform
+                        <Button onClick={(e) => handleLogin(e)}
+                            className="w-100 btn-login"
+                            variant="dark"
+                            type="submit"
+                            disabled={isLoading}
+                        >
+
+                            {/* isLoading === true ==> thi moi co ImSpinner10 */}
+                            {isLoading === true && <ImSpinner10 className="loaderIcon" />}
+                            <span>Log in to Typeform</span>
                         </Button>
                     </Form>
                 </div>
                 <div className="back">
-                    <span onClick={()=>{navigate("/")}}>&#60;&#60; Go to Home Page</span>
+                    <span onClick={() => { navigate("/") }}>&#60;&#60; Go to Home Page</span>
                 </div>
             </div>
         </div>

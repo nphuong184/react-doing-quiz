@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import 'nprogress/nprogress.css';
 
 ReactDOM.render(
   <Provider store={store}>
