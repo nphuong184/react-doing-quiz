@@ -32,11 +32,15 @@ const getListUsersWithPaginate = (page, limit) => {
 };
 
 const postLogin = (email, password) =>{
-  return axios.post(`api/v1/login`,{email, password, delay:5000})
+  return axios.post(`api/v1/login`,{email, password})
 }
 
 const postRegister = (username,email,password)=>{
   return axios.post(`api/v1/register`,{username,email,password})
+}
+
+const getQuizByUser = () =>{
+  return axios.get(`api/v1/quiz-by-participant`)
 }
 
 export {
@@ -47,4 +51,5 @@ export {
   getListUsersWithPaginate,
   postLogin,
   postRegister,
+  getQuizByUser
 };
