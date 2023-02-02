@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import { useLocation, useParams } from "react-router-dom";
 import { getDataQuiz } from "../services/apiService";
 import './DetailQuiz.scss';
+import _ from 'lodash';
 
 const DetailQuiz = (props) => {
     // const [quiz, setQuiz] = useState([]);
@@ -32,7 +33,8 @@ const DetailQuiz = (props) => {
                 // `key` is group's name (color), `value` is the array of objects
                 .map((value, key) => {
                     let answers = [];
-                    let questionDescription, image = null
+                    let questionDescription, image = null;
+                    console.log(value);
                     value.forEach((item, index) => {
                         if(index === 0 ){
                             questionDescription = item.description;
@@ -44,8 +46,8 @@ const DetailQuiz = (props) => {
                     return { question: key, answers, questionDescription,image }
                 })
                 .value();
+        console.log(data);
         }
-
 
     }
 

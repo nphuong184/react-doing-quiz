@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { getQuizByUser } from "../services/apiService";
 import './ListQuiz.scss';
 
 const ListQuiz = (props) => {
     const [listQuiz, setListQuiz] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         getQuizData()
@@ -28,7 +31,7 @@ const ListQuiz = (props) => {
                             <Card.Text>
                             {quiz.description}
                             </Card.Text>
-                            <Button variant="primary">Start Now</Button>
+                            <Button variant="primary" onClick={()=> navigate(`/quiz/${quiz.id}`,{ state: { email: "hello, I'm an email" } })}>Start Now</Button>
                         </Card.Body>
                     </Card>
                 )
