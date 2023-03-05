@@ -31,7 +31,7 @@ const ListQuiz = (props) => {
                             <Card.Text>
                             {quiz.description}
                             </Card.Text>
-                            <Button variant="primary" onClick={()=> navigate(`/quiz/${quiz.id}`,{ state: { email: "hello, I'm an email" } })}>Start Now</Button>
+                            <Button variant="primary" onClick={()=> navigate(`/quiz/${quiz.id}`,{ state: { quizTitle: quiz.description} })}>Start Now</Button>
                         </Card.Body>
                     </Card>
                 )
