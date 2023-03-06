@@ -59,8 +59,6 @@ const DetailQuiz = (props) => {
         }
     }
 
-    const handleNFinish = () => { }
-
     const handleCheckbox = (answerId, questionId) => {
         let dataQuizClone = _.cloneDeep(dataQuiz);
         // find nếu ko tìm được thì trả về undefind
@@ -69,24 +67,66 @@ const DetailQuiz = (props) => {
             +item.question === +questionId
         );
         if (question, question.answers) {
-            let a = question.answers.map(item => {
+            question.answers = question.answers.map(item => {
                 if (+item.id === +answerId) {
                     item.isSelected = !item.isSelected
                 }
                 return item;
             });
-            question.answers = a;
         }
         // hàm findIndex đúng trả về giá trị, sai gtri trả về = -1
         let index = dataQuizClone.findIndex(item => +item.question === +questionId);
-        
-        if(index > -1 ){
-            dataQuizClone[index]=question;
+
+        if (index > -1) {
+            dataQuizClone[index] = question;
             setDataQuiz(dataQuizClone);
         }
-        console.log('dataQuiz 3',dataQuiz);
+        console.log('dataQuiz 3', dataQuiz);
     }
-    console.log(dataQuiz);
+
+    const handleNFinish = () => {
+        console.log('check data before',dataQuiz);
+        let payload = {
+            quizId: +quizId,
+            answers: [],
+        }
+
+        let answers = [];
+        if (dataQuiz && dataQuiz.length > 0) {
+            dataQuiz.forEach(question => {
+                let questionId = question.question;
+                let userAnswerId = [];
+
+                // todo
+                question.answers.forEach(a=>{
+                    if(a.isSelected){
+                        userAnswerId.push(a.id)
+                    }
+                })
+                answers.push({
+                    questionId : +questionId,
+                    userAnswerId : userAnswerId
+                })
+            })
+
+            payload.answers = answers;
+            console.log('check data after',payload);
+
+            // data be tra ve {
+            //     "quizId": 1,
+            //     "answers": [
+            //         { 
+            //             "questionId": 1,
+            //             "userAnswerId": [3]
+            //         },
+            //         { 
+            //             "questionId": 2,
+            //             "userAnswerId": [6]
+            //         }
+            //     ]
+            // }
+        }
+    }
 
     return (
         <Container className="detail-quiz-container">

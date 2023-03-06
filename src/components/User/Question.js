@@ -8,7 +8,6 @@ const Question = (props) => {
 
     const handleHanleCheckbox = (e, answerId, questionId) => {
         let isChecked = e.target.checked;
-        console.log('data props', answerId, questionId);
         handleCheckbox(answerId, questionId);
     }
 
