@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
 import { useLocation, useParams } from "react-router-dom";
-import { getDataQuiz } from "../services/apiService";
+import { getDataQuiz, postSubmitQuiz } from "../services/apiService";
 import './DetailQuiz.scss';
 import _ from 'lodash';
 import Question from "./Question";
-
+import ModelResult from "./ModelResult";
+import RightContent from "./RightContent/Content";
 
 const DetailQuiz = (props) => {
     const [dataQuiz, setDataQuiz] = useState([]);
@@ -16,6 +17,8 @@ const DetailQuiz = (props) => {
 
     const quizId = params.id;
 
+    const [isShowModelResult, setIsShowModelResult] = useState(false);
+    const [dataModelResult, setDataModelResult] = useState({})
 
     useEffect(() => {
         fetchQuestions();
@@ -37,6 +40,7 @@ const DetailQuiz = (props) => {
                             questionDescription = item.description;
                             image = item.image
                         }
+                        // tạo biến isSelected = false để check xem đáp án có check chưa
                         item.answers.isSelected = false;
                         answers.push(item.answers);
                     })
@@ -59,13 +63,17 @@ const DetailQuiz = (props) => {
         }
     }
 
+    // xét câu trả lời đã selected chưa ==> 
+    // ==> check lại array answers, ktra xem đang check vào answer nào và đang click vào question nào
+    // tạo 1 mảng clone từ mảng dataQuiz 
     const handleCheckbox = (answerId, questionId) => {
         let dataQuizClone = _.cloneDeep(dataQuiz);
-        // find nếu ko tìm được thì trả về undefind
+        // find item có id question = questionId truyền từ Question qua nếu ko tìm được thì trả về undefind
         let question = dataQuizClone.find(item =>
-            // + ==> để cùng kiểu dữ liệu
+            // + ==> để cùng kiểu dữ liệu 
             +item.question === +questionId
         );
+        // 
         if (question, question.answers) {
             question.answers = question.answers.map(item => {
                 if (+item.id === +answerId) {
@@ -84,8 +92,22 @@ const DetailQuiz = (props) => {
         console.log('dataQuiz 3', dataQuiz);
     }
 
-    const handleNFinish = () => {
-        console.log('check data before',dataQuiz);
+    const handleNFinish = async () => {
+        // data be tra ve {
+        //     "quizId": 1,
+        //     "answers": [
+        //         { 
+        //             "questionId": 1,
+        //             "userAnswerId": [3]
+        //         },
+        //         { 
+        //             "questionId": 2,
+        //             "userAnswerId": [6]
+        //         }
+        //     ]
+        // }
+        console.log('check data before', dataQuiz);
+
         let payload = {
             quizId: +quizId,
             answers: [],
@@ -98,35 +120,39 @@ const DetailQuiz = (props) => {
                 let userAnswerId = [];
 
                 // todo
-                question.answers.forEach(a=>{
-                    if(a.isSelected){
+                question.answers.forEach(a => {
+                    if (a.isSelected) {
                         userAnswerId.push(a.id)
                     }
                 })
                 answers.push({
-                    questionId : +questionId,
-                    userAnswerId : userAnswerId
+                    questionId: +questionId,
+                    userAnswerId: userAnswerId
                 })
             })
 
             payload.answers = answers;
-            console.log('check data after',payload);
+            console.log('check data after', payload);
 
-            // data be tra ve {
-            //     "quizId": 1,
-            //     "answers": [
-            //         { 
-            //             "questionId": 1,
-            //             "userAnswerId": [3]
-            //         },
-            //         { 
-            //             "questionId": 2,
-            //             "userAnswerId": [6]
-            //         }
-            //     ]
-            // }
+            // submit api
+            let res = await postSubmitQuiz(payload);
+            console.log('check res: ', res);
+
+            if (res && res.EC === 0) {
+                setDataModelResult({
+                    countCorrect: res.DT.countCorrect,
+                    countTotal: res.DT.countTotal,
+                    quizData: res.DT.quizData
+                })
+                setIsShowModelResult(true);
+            } else {
+                alert('something wrongs')
+            }
+
         }
     }
+
+    console.log(dataQuiz);
 
     return (
         <Container className="detail-quiz-container">
@@ -151,8 +177,14 @@ const DetailQuiz = (props) => {
                 </div>
             </div>
             <div className="right-content">
-                count down
+                <RightContent
+                    data={dataQuiz} />
             </div>
+            <ModelResult
+                show={isShowModelResult}
+                setShow={setIsShowModelResult}
+                dataModelResult={dataQuiz}
+            />
         </Container>
     )
 }

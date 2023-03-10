@@ -1,0 +1,30 @@
+.main-timer{
+    border-bottom: 1px dashed;
+    padding: 15px 0 15px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.main-question{
+    display: flex;
+    gap: 15px 20px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    .question{
+        border: 1px solid #646262;
+        padding:  0 10px;
+        border-radius: 50%;
+        height: 35px;
+        width: 35px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        &:hover{
+        border: 1px solid #DF2E38;
+        color: #DF2E38;
+
+        }
+    }
+}

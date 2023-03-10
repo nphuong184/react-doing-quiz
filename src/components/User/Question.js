@@ -1,4 +1,6 @@
-import _ from "lodash"
+import _ from "lodash";
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
 const Question = (props) => {
     const { data, index, handleCheckbox } = props;
@@ -18,6 +20,11 @@ const Question = (props) => {
             <div className="question-body">
                 {data.image &&
                     <div className="img-q" >
+                        {/* <Zoom>
+                            <img className="dddd"
+                                src={`data:image/png;base64,${data.image}`} 
+                            />
+                        </Zoom> */}
                         <img src={`data:image/png;base64,${data.image}`} />
                     </div>
                 }
