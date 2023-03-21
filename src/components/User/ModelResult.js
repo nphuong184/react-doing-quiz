@@ -8,7 +8,7 @@ const ModelResult = (props) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // console.log(dataModelResult);
+  console.log('aaaa',dataModelResult);
 
   return (
     <>

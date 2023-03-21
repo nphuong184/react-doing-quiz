@@ -144,6 +144,7 @@ const DetailQuiz = (props) => {
                     countTotal: res.DT.countTotal,
                     quizData: res.DT.quizData
                 })
+                console.log('setDataModelResult',res.DT.countCorrect);
                 setIsShowModelResult(true);
             } else {
                 alert('something wrongs')
@@ -178,12 +179,13 @@ const DetailQuiz = (props) => {
             </div>
             <div className="right-content">
                 <RightContent
-                    data={dataQuiz} />
+                    data={dataQuiz} 
+                    handleNFinish={handleNFinish}/>
             </div>
             <ModelResult
                 show={isShowModelResult}
                 setShow={setIsShowModelResult}
-                dataModelResult={dataQuiz}
+                dataModelResult={dataModelResult}
             />
         </Container>
     )
